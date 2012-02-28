@@ -1,6 +1,6 @@
 /**
  * Add a link to [[Special:RecentChanges]] indicating the current version of MW
- * @traking: [[Special:GlobalUsage/User:Helder.wiki/Tools/AJAXTest.js]] ([[File:User:Helder.wiki/Tools/AJAXTest.js]])
+ * @traking: [[Special:GlobalUsage/User:Helder.wiki/Tools/AddMediaWikiVersionLinkToRecentChanges.js]] ([[File:User:Helder.wiki/Tools/AddMediaWikiVersionLinkToRecentChanges.js]])
  */
 if ( 'Recentchanges' == mw.config.get( 'wgCanonicalSpecialPageName' ) ) {
     $.getJSON(
