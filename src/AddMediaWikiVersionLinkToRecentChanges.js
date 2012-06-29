@@ -9,7 +9,7 @@ function addMWVersion( data ){
 	}
 	var	geral = data.query.general,
 		curRev = geral['git-hash'],
-		oldRev = $.cookie( 'mw-last-checked-rev' ) || 99292, // Last checked revision
+		oldRev = $.cookie( 'mw-last-checked-rev' ) || String(undefined), // Last checked revision
 		HTML = geral.generator + ': ' + curRev,
 		branch = geral.generator.match( /MediaWiki (.+)/ )[ 1 ];
 	mw.util.addCSS(
@@ -34,7 +34,7 @@ function addMWVersion( data ){
 			}),
 		$normalLink = $('<a>' + HTML + '</a>' )
 			.attr( 'href', mw.util.wikiGetlink( 'Special:Version' ) );
-	if ( oldRev !== curRev ) {
+	if ( oldRev !== String(curRev) ) {
 		$div.append( $versionLink )
 			.append( ' ( ' )
 			.append( $okLink )
