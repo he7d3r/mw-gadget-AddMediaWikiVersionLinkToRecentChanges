@@ -8,9 +8,9 @@ function addMWVersion( data ){
 		return;
 	}
 	var	geral = data.query.general,
-		curRev = geral.rev,
+		curRev = geral['git-hash'],
 		oldRev = $.cookie( 'mw-last-checked-rev' ) || 99292, // Last checked revision
-		HTML = geral.generator + ': r' + curRev,
+		HTML = geral.generator + ': ' + curRev,
 		branch = geral.generator.match( /MediaWiki (.+)/ )[ 1 ];
 	mw.util.addCSS(
 		'#my-mw-version { z-index:1; font-size:75%; position:absolute; top: 2px; left:2px; }' +
@@ -34,7 +34,7 @@ function addMWVersion( data ){
 			}),
 		$normalLink = $('<a>' + HTML + '</a>' )
 			.attr( 'href', mw.util.wikiGetlink( 'Special:Version' ) );
-	if ( oldRev < curRev ) {
+	if ( oldRev !== curRev ) {
 		$div.append( $versionLink )
 			.append( ' ( ' )
 			.append( $okLink )
