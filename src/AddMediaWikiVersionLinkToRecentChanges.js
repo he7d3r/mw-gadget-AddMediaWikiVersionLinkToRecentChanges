@@ -14,7 +14,7 @@ function addMWVersion( data ){
 	}
 	var	geral = data.query.general,
 		curRev = geral['git-hash'],
-		oldRev = $.cookie( 'mw-last-checked-rev' ) || String(undefined), // Last checked revision
+		oldRev = $.cookie( mw.config.get('wgCookiePrefix') + 'mw-last-checked-rev' ) || String(undefined), // Last checked revision
 		HTML = geral.generator + ':' + curRev.substr( 0, 7 ),
 		branch = geral.generator.match( /MediaWiki (.+)/ )[ 1 ],
 		$div = $( '<div id="my-mw-version"></div>' ),
@@ -27,7 +27,7 @@ function addMWVersion( data ){
 			.attr( 'href', '//pt.wikibooks.org/wiki/User:Helder.wiki/Tools/AddMediaWikiVersionLinkToRecentChanges.js?action=edit' )
 			.click(function(e){
 				e.preventDefault();
-				$.cookie( 'mw-last-checked-rev', curRev, {
+				$.cookie( mw.config.get('wgCookiePrefix') + 'mw-last-checked-rev', curRev, {
 					expires: 30,
 					path: '/'
 				} );
