@@ -52,8 +52,7 @@ function addMWVersion( data ){
 
 if ( 'Recentchanges' === mw.config.get( 'wgCanonicalSpecialPageName' ) ) {
 	mw.loader.using( ['mediawiki.api'], function () {
-		var api = new mw.Api();
-		api.get( {
+		( new mw.Api() ).get( {
 			'action': 'query',
 			'meta': 'siteinfo'
 		}, {
