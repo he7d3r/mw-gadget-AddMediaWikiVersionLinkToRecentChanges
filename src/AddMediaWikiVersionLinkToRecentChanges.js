@@ -3,7 +3,7 @@
  * @author: [[User:Helder.wiki]]
  * @tracking: [[Special:GlobalUsage/User:Helder.wiki/Tools/AddMediaWikiVersionLinkToRecentChanges.js]] ([[File:User:Helder.wiki/Tools/AddMediaWikiVersionLinkToRecentChanges.js]])
  */
-/*jslint browser: true, white: true, regexp: true*/
+/*jshint browser: true, camelcase: true, curly: true, eqeqeq: true, immed: true, latedef: true, newcap: true, noarg: true, noempty: true, nonew: true, quotmark: true, undef: true, unused: true, strict: true, trailing: true, maxlen: 135, evil: true, onevar: true */
 /*global jQuery, mediaWiki */
 ( function ( $, mw ) {
 'use strict';
@@ -14,25 +14,27 @@ function addMWVersion( data ){
 	}
 	var	geral = data.query.general,
 		curRev = geral['git-hash'],
-		oldRev = $.cookie( mw.config.get('wgCookiePrefix') + 'mw-last-checked-rev' ) || String(undefined), // Last checked revision
+		// Last checked revision
+		oldRev = $.cookie( mw.config.get('wgCookiePrefix') + 'mw-last-checked-rev' ) || String(undefined),
 		HTML = geral.generator + ':' + curRev.substr( 0, 7 ),
-		branch = geral.generator.match( /MediaWiki (.+)/ )[ 1 ],
+		branch = geral.generator.match( /^MediaWiki (.+)$/ )[ 1 ],
 		$div = $( '<div id="my-mw-version"></div>' ),
 		$versionLink = $( '<a>' + HTML + '</a>' ).attr( {
-			'href': 'https://gerrit.wikimedia.org/r/gitweb?p=mediawiki%2Fcore.git;a=shortlog;h=refs%2Fheads%2Fwmf%2F' + branch,
+			'href': 'http://git.wikimedia.org/log/mediawiki%2Fcore.git/refs%2Fheads%2Fwmf%2F' + branch,
 			'class': 'updated',
 			'title': 'Ver as alterações recentes no branch /wmf/' + branch + '.'
 		} ),
 		$okLink = $( '<a>ok</a>' )
 			.attr( 'href', '//pt.wikibooks.org/wiki/User:Helder.wiki/Tools/AddMediaWikiVersionLinkToRecentChanges.js?action=edit' )
-			.click(function(e){
+			.click( function(e){
 				e.preventDefault();
 				$.cookie( mw.config.get('wgCookiePrefix') + 'mw-last-checked-rev', curRev, {
 					expires: 30,
 					path: '/'
 				} );
-				document.location.reload( false ); // Reloads the document (from the cache)
-			}),
+				// Reloads the document (from the cache)
+				document.location.reload( false );
+			} ),
 		$normalLink = $('<a>' + HTML + '</a>' )
 			.attr( 'href', mw.util.wikiGetlink( 'Special:Version' ) );
 	mw.util.addCSS(
@@ -51,13 +53,12 @@ function addMWVersion( data ){
 }
 
 if ( 'Recentchanges' === mw.config.get( 'wgCanonicalSpecialPageName' ) ) {
-	mw.loader.using( ['mediawiki.api'], function () {
+	mw.loader.using( 'mediawiki.api', function () {
 		( new mw.Api() ).get( {
-			'action': 'query',
-			'meta': 'siteinfo'
-		}, {
-			ok: addMWVersion
-		} );
+			action: 'query',
+			meta: 'siteinfo'
+		} )
+		.done( addMWVersion );
 	} );
 }
 
