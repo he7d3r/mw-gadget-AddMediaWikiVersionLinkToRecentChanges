@@ -36,7 +36,7 @@ function addMWVersion( data ){
 				document.location.reload( false );
 			} ),
 		$normalLink = $('<a>' + HTML + '</a>' )
-			.attr( 'href', mw.util.wikiGetlink( 'Special:Version' ) );
+			.attr( 'href', mw.util.getUrl( 'Special:Version' ) );
 	mw.util.addCSS(
 		'#my-mw-version { z-index:1; font-size:75%; position:absolute; top: 2px; left:2px; }' +
 		'#my-mw-version a.updated { color:green; font-weight:bold; }'
