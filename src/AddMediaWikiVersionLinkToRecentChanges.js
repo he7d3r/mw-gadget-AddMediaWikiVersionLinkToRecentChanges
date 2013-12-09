@@ -20,7 +20,7 @@ function addMWVersion( data ){
 		branch = geral.generator.match( /^MediaWiki (.+)$/ )[ 1 ],
 		$div = $( '<div id="my-mw-version"></div>' ),
 		$versionLink = $( '<a>' + HTML + '</a>' ).attr( {
-			'href': 'http://git.wikimedia.org/log/mediawiki%2Fcore.git/refs%2Fheads%2Fwmf%2F' + branch,
+			'href': 'https://git.wikimedia.org/log/mediawiki%2Fcore.git/refs%2Fheads%2Fwmf%2F' + branch,
 			'class': 'updated',
 			'title': 'Ver as alterações recentes no branch /wmf/' + branch + '.'
 		} ),
@@ -52,7 +52,7 @@ function addMWVersion( data ){
 	$div.appendTo( '#mw-head' );
 }
 
-if ( 'Recentchanges' === mw.config.get( 'wgCanonicalSpecialPageName' ) ) {
+if ( $.inArray( mw.config.get( 'wgCanonicalSpecialPageName' ), [ 'Recentchanges', 'Watchlist' ] ) !== -1 ) {
 	mw.loader.using( 'mediawiki.api', function () {
 		( new mw.Api() ).get( {
 			action: 'query',
