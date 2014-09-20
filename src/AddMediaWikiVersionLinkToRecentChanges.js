@@ -25,7 +25,6 @@ function addMWVersion( data ){
 			'title': 'Ver as alterações recentes no branch /wmf/' + branch + '.'
 		} ),
 		$okLink = $( '<a>ok</a>' )
-			.attr( 'href', '//pt.wikibooks.org/wiki/User:Helder.wiki/Tools/AddMediaWikiVersionLinkToRecentChanges.js?action=edit' )
 			.click( function(e){
 				e.preventDefault();
 				$.cookie( mw.config.get('wgCookiePrefix') + 'mw-last-checked-rev', curRev, {
