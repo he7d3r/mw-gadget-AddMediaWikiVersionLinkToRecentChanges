@@ -18,7 +18,8 @@
 			branch = geral.generator.match( /^MediaWiki (.+)$/ )[ 1 ],
 			$div = $( '<div id="my-mw-version"></div>' ),
 			$versionLink = $( '<a>' + HTML + '</a>' ).attr( {
-				href: 'https://git.wikimedia.org/log/mediawiki%2Fcore.git/refs%2Fheads%2Fwmf%2F' + branch,
+				href: 'https://phabricator.wikimedia.org/source/mediawiki/history/wmf%252F' +
+                                    encodeURIComponent( branch ) + '/',
 				'class': 'updated',
 				title: 'Ver as alterações recentes no branch /wmf/' + branch + '.'
 			} ),
